@@ -26,7 +26,7 @@ const reducer = (state, action) => {
                     input: eval(state.input).toString(),
                 };
             } catch (error) {
-                return { ...state, input: "Error" };
+                return { ...state, input: "" };
             }
 
         case "CLEAR":
