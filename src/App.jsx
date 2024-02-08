@@ -29,6 +29,8 @@ const reducer = (state, action) => {
                 };
             }
         case "CALCULATE":
+            if (state.input == "") return state;
+
             try {
                 return {
                     ...state,
