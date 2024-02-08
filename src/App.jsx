@@ -3,36 +3,51 @@ import { useReducer } from "react";
 
 const initialState = {
     input: "",
+    result: "",
+    calculatingStatus: true,
 };
 
 const reducer = (state, action) => {
     switch (action.type) {
         case "ADD_INPUT":
-            if (
+            if (state.input === "" && "+/*-".includes(action.payload)) {
+                return state;
+            } else if (
                 "+/*-".includes(state.input.slice(-1)) &&
                 "+/*-".includes(action.payload)
             ) {
                 return {
                     ...state,
                     input: state.input.slice(0, -1) + action.payload,
+                    calculatingStatus: true,
                 };
             } else {
-                return { ...state, input: state.input + action.payload };
+                return {
+                    ...state,
+                    input: state.input + action.payload,
+                    calculatingStatus: true,
+                };
             }
         case "CALCULATE":
             try {
                 return {
                     ...state,
-                    input: eval(state.input).toString(),
+                    calculatingStatus: false,
+                    result: eval(state.input).toString(),
+                    input: "",
                 };
             } catch (error) {
-                return { ...state, input: "Error" };
+                return { ...state, input: "Error", calculatingStatus: true };
             }
 
         case "CLEAR":
             return initialState;
         case "DELETE":
-            return { ...state, input: state.input.slice(0, -1) };
+            return {
+                ...state,
+                input: state.input.slice(0, -1),
+                calculatingStatus: true,
+            };
         default:
             return state;
     }
@@ -49,11 +64,7 @@ function App() {
         } else if (btnVal === "Del") {
             dispatch({ type: "DELETE" });
         } else {
-            if (state.input == "" && "+/-*=".includes(btnVal)) {
-                return;
-            } else {
-                dispatch({ type: "ADD_INPUT", payload: btnVal });
-            }
+            dispatch({ type: "ADD_INPUT", payload: btnVal });
         }
     };
 
@@ -67,7 +78,9 @@ function App() {
                         type="text"
                         placeholder="0"
                         readOnly
-                        value={state.input}
+                        value={
+                            state.calculatingStatus ? state.input : state.result
+                        }
                     />
                 </div>
                 <div className="g-1">
