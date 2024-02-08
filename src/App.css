@@ -1,0 +1,56 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: large;
+}
+
+.app {
+  margin: auto;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.btn-container {
+  width: 340px;
+  height: 70%;
+}
+
+.btn-container > div:first-child > input{
+  padding: 10px 25px;
+  width: 100%;
+  height: 75px;
+  background-color: black;
+  font-size: 30px;
+  color: white;
+  border: 0.4px solid gray;
+}
+
+.g-1 {
+  display: flex;
+}
+
+.g-1 button {
+  width: 25%;
+  height: 85px;
+  border: 0.4px solid gray;
+  background-color: white;
+}
+
+.g-1>.btn-ac {
+  width: 50%;
+}
+
+.g-1>.btn-zero {
+  width: 50%;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: antiquewhite;
+}
