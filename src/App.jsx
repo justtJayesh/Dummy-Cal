@@ -47,7 +47,8 @@ const reducer = (state, action) => {
         case "DELETE":
             return {
                 ...state,
-                input: state.input.slice(0, -1),
+                input: state.result.slice(0, -1),
+                result: state.result.slice(0, -1),
                 calculatingStatus: true,
             };
         default:
@@ -72,8 +73,6 @@ function App() {
 
     return (
         <div className="app">
-            {/* <h1>Calculator App</h1> */}
-
             <div className="btn-container">
                 <div>
                     <input
